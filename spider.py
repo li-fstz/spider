@@ -23,7 +23,7 @@ def login (name, password, cookies = ''):
     else:
         url = "http://222.27.192.13/SJZCPT/DLGL/LoginSign.aspx?Name=%s&Password=%s&jueSe=2&flag=login" % (name, password)
         r = s.post (url)
-        if r.text == 'success':
+        if (r.text == 'success'):
             print ('Password Login Success')
             s.cookies.set ('XH', name)
             return s
@@ -77,7 +77,7 @@ def choice (s):
         print ('暂时没有可选课程')
     else:
         id = int (input ("请输入序号：")) - 1
-        if (id > cnt - 1):
+        if (id > cnt - 1 or id < 0):
             print ('输入错误')
             exit ()
         r = s.post ('http://222.27.192.13/WLSYJXGL/ajax/XuanKeByXS_ID.aspx', data=allData[id])
