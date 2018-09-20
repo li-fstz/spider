@@ -123,15 +123,12 @@ def choice (s, data):
     else:
         print ('选课失败')
 
-if (len (sys.argv) == 1):
+if (len (sys.argv) == 1 or sys.argv[1] == 'spider'):
     print ('查询模式 - 使用 spider 账户')
     s = load ()
     search (s)
 else:
-    if (sys.argv[1] != 'spider'):
-        print ('选课模式 - 使用 %s 账户' % sys.argv[1])
-        s = load (sys.argv[1])
-        data = search (s)
-        choice (s, data)
-    else:
-        print ('请不要使用 spider 账户选课！')
+    print ('选课模式 - 使用 %s 账户' % sys.argv[1])
+    s = load (sys.argv[1])
+    data = search (s)
+    choice (s, data)
