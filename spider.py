@@ -76,7 +76,7 @@ def search (s):
 
 def load (user = 'spider'):
     config = configparser.ConfigParser()
-    config.read ('config.ini')
+    config.read (sys.path[0] + '\\config.ini')
     s = None
     if not user in config:
         print ('新建账户 - %s' % user)
@@ -92,24 +92,24 @@ def load (user = 'spider'):
                                     'password': password, 
                                     'cookies': s.cookies['ASP.NET_SessionId'],
                                 }})
-            with open ('config.ini', 'w') as f:
+            with open (sys.path[0] + '\\config.ini', 'w') as f:
                 config.write (f)
     else:
         s = login (config[user]['name'], config[user]['password'], config[user]['cookies'])
         if s == None:
             print ('学号或密码错误，%s 账户信息无效，以被删除！' % user)
             config.remove_section (user)
-            with open ('config.ini', 'w') as f:
+            with open (sys.path[0] + '\\config.ini', 'w') as f:
                 config.write (f)
             exit ()
         else:
             config[user]['cookies'] = s.cookies['ASP.NET_SessionId']
-            with open ('config.ini', 'w') as f:
+            with open (sys.path[0] + '\\config.ini', 'w') as f:
                 config.write (f)
     return s
 
 def choice (s, data):
-    id = int (input ("请输入序号（输入0取消选课）："))
+    id = int (input ("请输入序号（输入 0 取消选课）："))
     if id > len(data) or id < 0:
         print ('输入错误')
         exit ()
